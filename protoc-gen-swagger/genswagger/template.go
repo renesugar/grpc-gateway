@@ -201,6 +201,18 @@ func renderMessagesAsDefinition(messages messageMap, d swaggerDefinitionsObject,
 			continue
 		case ".google.protobuf.Duration":
 			continue
+		case ".google.protobuf.StringValue":
+			continue
+		case ".google.protobuf.Int32Value":
+			continue
+		case ".google.protobuf.Int64Value":
+			continue
+		case ".google.protobuf.FloatValue":
+			continue
+		case ".google.protobuf.DoubleValue":
+			continue
+		case ".google.protobuf.BoolValue":
+			continue
 		}
 		if opt := msg.GetOptions(); opt != nil && opt.MapEntry != nil && *opt.MapEntry {
 			continue
@@ -567,7 +579,7 @@ func renderServices(services []*descriptor.Service, paths swaggerPathsObject, re
 						Required:    true,
 						Schema:      &schema,
 					})
-				} else if b.HTTPMethod == "GET" {
+				} else if b.HTTPMethod == "GET" || b.HTTPMethod == "DELETE" {
 					// add the parameters to the query string
 					queryParams, err := messageToQueryParameters(meth.RequestType, reg, b.PathParams)
 					if err != nil {
